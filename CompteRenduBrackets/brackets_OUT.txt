@@ -1,0 +1,17 @@
+NEXT
+true
+NEXT
+false
+NEXT
+true
+NEXT
+true
+NEXT
+false
+NEXT
+false
+NEXT
+false
+NEXT
+false
+NEXT

@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>COMPTE RENDU</title>
+<meta name="author" content="(cliquot)"/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/css/reveal.css"/>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/css/theme/moon.css" id="theme"/>
+
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'https://cdn.jsdelivr.net/npm/reveal.js/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1 class="title">COMPTE RENDU</h1><h2 class="author">cliquot</h2><p class="date">Created: 2020-05-27 mer. 18:10</p>
+</section>
+<section id="table-of-contents"><div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#/slide-org3e9f55d">1. Fonction utilisé</a>
+<ul>
+<li><a href="#/slide-org5400354">1.1. ObtenirOUT</a></li>
+<li><a href="#/slide-org931d24d">1.2. ObtenirIN</a></li>
+<li><a href="#/slide-org0589dd6">1.3. ComparaisonString</a></li>
+<li><a href="#/slide-org4c71431">1.4. ComparaisonInt</a></li>
+</ul>
+</li>
+<li><a href="#/slide-org5c548bf">2. Brackets</a>
+<ul>
+<li><a href="#/slide-org000abf8">2.1. Introduction</a></li>
+<li><a href="#/slide-orga95e1d0">2.2. Principe de résolution</a>
+<ul>
+<li><a href="#/slide-orgdb67af6">2.2.1. Création des piles</a></li>
+<li><a href="#/slide-org8c67778">2.2.2. Résolution</a></li>
+</ul>
+</li>
+<li><a href="#/slide-org1a4c4fd">2.3. Vérification de mon code</a>
+<ul>
+<li><a href="#/slide-org32bee90">2.3.1. Entrée du test à réaliser</a></li>
+<li><a href="#/slide-orgc661d7c">2.3.2. Mon résultat pour ce test</a></li>
+<li><a href="#/slide-org76a5c51">2.3.3. Résultat attendue pour ce test</a></li>
+<li><a href="#/slide-org891913e">2.3.4. Comparaison des résultats</a></li>
+</ul>
+</li>
+<li><a href="#/slide-org1ba2e86">2.4. Au niveau de la mémoire</a></li>
+<li><a href="#/slide-orgec90ae1">2.5. Solution</a></li>
+</ul>
+</li>
+<li><a href="#/slide-org545c493">3. Lumen</a>
+<ul>
+<li><a href="#/slide-orgeb04d3e">3.1. Introduction</a></li>
+<li><a href="#/slide-org7ed6f82">3.2. Principe de résolution</a></li>
+<li><a href="#/slide-org8c059dc">3.3. Vérification de mon code</a>
+<ul>
+<li><a href="#/slide-org22c7664">3.3.1. Entrée du test à réaliser</a></li>
+<li><a href="#/slide-orgdd135f2">3.3.2. Mon résultat pour ce test</a></li>
+<li><a href="#/slide-org843e10f">3.3.3. Résultat attendue pour ce test</a></li>
+<li><a href="#/slide-org76a2c1c">3.3.4. Comparaison des résultats</a></li>
+</ul>
+</li>
+<li><a href="#/slide-org11f44ab">3.4. Au niveau de la mémoire</a></li>
+<li><a href="#/slide-orgbf881af">3.5. Solution</a></li>
+</ul>
+</li>
+<li><a href="#/slide-org8392e77">4. Autre fichier</a>
+<ul>
+<li>
+<ul>
+<li><a href="#/slide-org7cc7a9c">4.0.1. Différentes version de ce document</a></li>
+<li><a href="#/slide-org9b1616a">4.0.2. Mes fichiers IN et OUT</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</section>
+
+<section>
+<section id="slide-org3e9f55d">
+<h2 id="org3e9f55d"><span class="section-number-2">1</span> Fonction utilisé</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+</section>
+<section id="slide-org5400354">
+<h3 id="org5400354"><span class="section-number-3">1.1</span> ObtenirOUT</h3>
+<div class="org-src-container">
+
+<pre  class="src src-C" id="obtenirOUT"><code trim><span style="color: #94BFF3;">#include</span> <span style="color: #DCDCCC;">&lt;</span><span style="color: #CC9393;">stdio.h</span><span style="color: #DCDCCC;">&gt;</span>
+<span style="color: #94BFF3;">#include</span> <span style="color: #DCDCCC;">&lt;</span><span style="color: #CC9393;">stdlib.h</span><span style="color: #DCDCCC;">&gt;</span>
+<span style="color: #94BFF3;">#include</span> <span style="color: #DCDCCC;">&lt;</span><span style="color: #CC9393;">string.h</span><span style="color: #DCDCCC;">&gt;</span>
+
+<span style="color: #7CB8BB; font-weight: bold;">int</span> <span style="color: #93E0E3;">main</span> <span style="color: #DCDCCC;">()</span>
+<span style="color: #DCDCCC;">{</span>
+
+  <span style="color: #7CB8BB; font-weight: bold;">FILE</span>* <span style="color: #DFAF8F;">f</span>;
+  <span style="color: #7CB8BB; font-weight: bold;">char</span> <span style="color: #DFAF8F;">chaine</span><span style="color: #BFEBBF;">[</span>100<span style="color: #BFEBBF;">]</span>;
+  <span style="color: #7CB8BB; font-weight: bold;">int</span> <span style="color: #DFAF8F;">num</span> = data;
+
+
+  f = fopen<span style="color: #BFEBBF;">(</span>file_name ,<span style="color: #CC9393;">"r"</span><span style="color: #BFEBBF;">)</span>;
+
+
+  <span style="color: #F0DFAF; font-weight: bold;">for</span><span style="color: #BFEBBF;">(</span><span style="color: #7CB8BB; font-weight: bold;">int</span> <span style="color: #DFAF8F;">i</span> = 0; i &lt; num ; i++<span style="color: #BFEBBF;">)</span>
+    <span style="color: #BFEBBF;">{</span>
+
+      <span style="color: #F0DFAF; font-weight: bold;">do</span>
+        <span style="color: #D0BF8F;">{</span>
+          fgets<span style="color: #93E0E3;">(</span>chaine,100,f<span style="color: #93E0E3;">)</span>;
+
+        <span style="color: #D0BF8F;">}</span> <span style="color: #F0DFAF; font-weight: bold;">while</span><span style="color: #D0BF8F;">(</span>strcmp<span style="color: #93E0E3;">(</span>chaine,<span style="color: #CC9393;">"NEXT\n"</span><span style="color: #93E0E3;">)</span><span style="color: #D0BF8F;">)</span>;
+    <span style="color: #BFEBBF;">}</span>
+
+      fgets<span style="color: #BFEBBF;">(</span>chaine,100,f<span style="color: #BFEBBF;">)</span>;
+  <span style="color: #F0DFAF; font-weight: bold;">do</span> 
+    <span style="color: #BFEBBF;">{</span>
+      printf<span style="color: #D0BF8F;">(</span><span style="color: #CC9393;">"%s"</span>,chaine<span style="color: #D0BF8F;">)</span>;
+      fgets<span style="color: #D0BF8F;">(</span>chaine,100,f<span style="color: #D0BF8F;">)</span>;
+    <span style="color: #BFEBBF;">}</span><span style="color: #F0DFAF; font-weight: bold;">while</span><span style="color: #BFEBBF;">(</span>strcmp<span style="color: #D0BF8F;">(</span>chaine,<span style="color: #CC9393;">"NEXT\n"</span><span style="color: #D0BF8F;">)</span><span style="color: #BFEBBF;">)</span>;
+  <span style="color: #F0DFAF; font-weight: bold;">return</span> 0;
+<span style="color: #DCDCCC;">}</span>
+</code></pre>
+</div>
+
+
+</section>
+<section id="slide-org931d24d">
+<h3 id="org931d24d"><span class="section-number-3">1.2</span> ObtenirIN</h3>
+<div class="org-src-container">
+
+<pre  class="src src-C" id="obtenirIN"><code trim><span style="color: #94BFF3;">#include</span> <span style="color: #DCDCCC;">&lt;</span><span style="color: #CC9393;">stdio.h</span><span style="color: #DCDCCC;">&gt;</span>
+<span style="color: #94BFF3;">#include</span> <span style="color: #DCDCCC;">&lt;</span><span style="color: #CC9393;">stdlib.h</span><span style="color: #DCDCCC;">&gt;</span>
+<span style="color: #94BFF3;">#include</span> <span style="color: #DCDCCC;">&lt;</span><span style="color: #CC9393;">string.h</span><span style="color: #DCDCCC;">&gt;</span>
+
+<span style="color: #7CB8BB; font-weight: bold;">int</span> <span style="color: #93E0E3;">main</span> <span style="color: #DCDCCC;">()</span>
+<span style="color: #DCDCCC;">{</span>
+
+  <span style="color: #7CB8BB; font-weight: bold;">FILE</span>* <span style="color: #DFAF8F;">f</span>;
+  <span style="color: #7CB8BB; font-weight: bold;">char</span> <span style="color: #DFAF8F;">chaine</span><span style="color: #BFEBBF;">[</span>100<span style="color: #BFEBBF;">]</span>;
+  <span style="color: #7CB8BB; font-weight: bold;">int</span> <span style="color: #DFAF8F;">num</span> = data;
+
+
+  f = fopen<span style="color: #BFEBBF;">(</span>file_name ,<span style="color: #CC9393;">"r"</span><span style="color: #BFEBBF;">)</span>;
+
+
+  <span style="color: #F0DFAF; font-weight: bold;">for</span><span style="color: #BFEBBF;">(</span><span style="color: #7CB8BB; font-weight: bold;">int</span> <span style="color: #DFAF8F;">i</span> = 0; i &lt; num ; i++<span style="color: #BFEBBF;">)</span>
+    <span style="color: #BFEBBF;">{</span>
+
+      <span style="color: #F0DFAF; font-weight: bold;">do</span>
+        <span style="color: #D0BF8F;">{</span>
+          fgets<span style="color: #93E0E3;">(</span>chaine,100,f<span style="color: #93E0E3;">)</span>;
+
+        <span style="color: #D0BF8F;">}</span> <span style="color: #F0DFAF; font-weight: bold;">while</span><span style="color: #D0BF8F;">(</span>strcmp<span style="color: #93E0E3;">(</span>chaine,<span style="color: #CC9393;">"NEXT\n"</span><span style="color: #93E0E3;">)</span><span style="color: #D0BF8F;">)</span>;
+    <span style="color: #BFEBBF;">}</span>
+
+  fgets<span style="color: #BFEBBF;">(</span>chaine,100,f<span style="color: #BFEBBF;">)</span>;
+  <span style="color: #F0DFAF; font-weight: bold;">do</span> 
+    <span style="color: #BFEBBF;">{</span>
+
+
+
+          printf<span style="color: #D0BF8F;">(</span><span style="color: #CC9393;">"%s"</span>,chaine<span style="color: #D0BF8F;">)</span>;
+
+        fgets<span style="color: #D0BF8F;">(</span>chaine,100,f<span style="color: #D0BF8F;">)</span>;
+        <span style="color: #BFEBBF;">}</span><span style="color: #F0DFAF; font-weight: bold;">while</span><span style="color: #BFEBBF;">(</span>strcmp<span style="color: #D0BF8F;">(</span>chaine,<span style="color: #CC9393;">"NEXT\n"</span><span style="color: #D0BF8F;">)</span><span style="color: #BFEBBF;">)</span>;
+      <span style="color: #F0DFAF; font-weight: bold;">return</span> 0;
+    <span style="color: #DCDCCC;">}</span>
+</code></pre>
+</div>
+
+
+
+
+
+</section>
+<section id="slide-org0589dd6">
+<h3 id="org0589dd6"><span class="section-number-3">1.3</span> ComparaisonString</h3>
+<div class="org-src-container">
+
+<pre  class="src src-C" id="comparaisonString"><code trim>
+<span style="color: #94BFF3;">#include</span><span style="color: #DCDCCC;">&lt;</span><span style="color: #CC9393;">stdio.h</span><span style="color: #DCDCCC;">&gt;</span>
+<span style="color: #94BFF3;">#include</span><span style="color: #DCDCCC;">&lt;</span><span style="color: #CC9393;">string.h</span><span style="color: #DCDCCC;">&gt;</span>
+<span style="color: #94BFF3;">#include</span><span style="color: #DCDCCC;">&lt;</span><span style="color: #CC9393;">stdlib.h</span><span style="color: #DCDCCC;">&gt;</span>
+
+<span style="color: #7CB8BB; font-weight: bold;">int</span> <span style="color: #93E0E3;">main</span><span style="color: #DCDCCC;">()</span>
+<span style="color: #DCDCCC;">{</span>
+<span style="color: #7CB8BB; font-weight: bold;">char</span> <span style="color: #DFAF8F;">tab</span><span style="color: #BFEBBF;">[</span>50<span style="color: #BFEBBF;">]</span>;
+strcpy<span style="color: #BFEBBF;">(</span>tab,<span style="color: #F0DFAF; font-weight: bold;">!</span>strcmp<span style="color: #D0BF8F;">(</span>v1,v2<span style="color: #D0BF8F;">)</span> ? <span style="color: #CC9393;">"M&#234;me r&#233;sultats"</span> : <span style="color: #CC9393;">"R&#233;sultats diff&#233;rents"</span><span style="color: #BFEBBF;">)</span>;
+
+printf<span style="color: #BFEBBF;">(</span><span style="color: #CC9393;">"%s"</span>,tab<span style="color: #BFEBBF;">)</span>;
+
+
+
+<span style="color: #DCDCCC;">}</span>
+</code></pre>
+</div>
+
+
+</section>
+<section id="slide-org4c71431">
+<h3 id="org4c71431"><span class="section-number-3">1.4</span> ComparaisonInt</h3>
+<div class="org-src-container">
+
+<pre  class="src src-C" id="comparaisonInt"><code trim>
+<span style="color: #94BFF3;">#include</span><span style="color: #DCDCCC;">&lt;</span><span style="color: #CC9393;">stdio.h</span><span style="color: #DCDCCC;">&gt;</span>
+<span style="color: #94BFF3;">#include</span><span style="color: #DCDCCC;">&lt;</span><span style="color: #CC9393;">string.h</span><span style="color: #DCDCCC;">&gt;</span>
+<span style="color: #94BFF3;">#include</span><span style="color: #DCDCCC;">&lt;</span><span style="color: #CC9393;">stdlib.h</span><span style="color: #DCDCCC;">&gt;</span>
+
+<span style="color: #7CB8BB; font-weight: bold;">int</span> <span style="color: #93E0E3;">main</span><span style="color: #DCDCCC;">()</span>
+<span style="color: #DCDCCC;">{</span>
+<span style="color: #7CB8BB; font-weight: bold;">char</span> <span style="color: #DFAF8F;">tab</span><span style="color: #BFEBBF;">[</span>50<span style="color: #BFEBBF;">]</span>;
+ strcpy<span style="color: #BFEBBF;">(</span>tab,v1 == v2 ? <span style="color: #CC9393;">"M&#234;me r&#233;sultats"</span> : <span style="color: #CC9393;">"R&#233;sultats diff&#233;rents"</span> <span style="color: #BFEBBF;">)</span>;
+
+printf<span style="color: #BFEBBF;">(</span><span style="color: #CC9393;">"%s"</span>,tab<span style="color: #BFEBBF;">)</span>;
+
+
+
+<span style="color: #DCDCCC;">}</span>
+</code></pre>
+</div>
+
+
+
+
+</section>
+</section>
+<section>
+<section id="slide-org5c548bf">
+<h2 id="org5c548bf"><span class="section-number-2">2</span> Brackets</h2>
+<p>
+<a href="https://www.codingame.com/training/easy/brackets-extreme-edition">Lien vers le problème</a>
+</p>
+
+</section>
+<section id="slide-org000abf8">
+<h3 id="org000abf8"><span class="section-number-3">2.1</span> Introduction</h3>
+<p>
+Les brackets est un nom regroupant <code>les parenthéses ()</code>, <code>les
+crochets []</code> et <code>les accolades {}</code>. Le but de ce Coding Game est de
+savoir si nos brackets sont toujours appairés et imbriqué ( <i>un [ avec un ] un {
+avec un }  etc&#x2026;</i> ) 
+</p>
+
+<p>
+Exemple :
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Expression</th>
+<th scope="col" class="org-right">Résultat</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">{()}[]()</td>
+<td class="org-right">Correct</td>
+</tr>
+
+<tr>
+<td class="org-left">{5R}{}(())</td>
+<td class="org-right">Correct</td>
+</tr>
+
+<tr>
+<td class="org-left">{}[(]]</td>
+<td class="org-right">Incorrect</td>
+</tr>
+
+<tr>
+<td class="org-left">{([)]}</td>
+<td class="org-right">Incorrect</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>
+Lorsque notre résultat est correct, l'algorithme devra renvoyé true et
+false lorsque le résultat est incorrect
+</p>
+
+</section>
+<section id="slide-orga95e1d0">
+<h3 id="orga95e1d0"><span class="section-number-3">2.2</span> Principe de résolution</h3>
+<p>
+J'ai opté pour résoudre ce problème l'utilisation de pile, même si il peut exister des solutions beaucoup plus optimisée (Code de Alain Delpuch). Cependant c'était un bonne entraînement d'intégrer ce type en C.
+</p>
+
+</section>
+<section id="slide-orgdb67af6">
+<h4 id="orgdb67af6"><span class="section-number-4">2.2.1</span> Création des piles</h4>
+<p>
+Pour créer une structure <b>pile</b>, il nous faut d'abord créer la structure <b>liste</b>, et donc créer la structure <b>maillon</b>. Cependant comme je n'avais besoin nullement d'un avantage des <b>listes</b>, cette structure est directement intégré dans la structure <b>pile</b>  
+</p>
+
+<p>
+Des <b>maillons</b> simples suffisent, c'est à dire avec un champ <b>data</b> (<i>ici data sera de type char</i>) et un autre champ <b>suivant</b> (<i>qui sera un pointeur vers le <b>maillon</b> suivant</i>).
+</p>
+
+
+<p>
+La structure <b>liste</b> ne devrait normalement contenir qu'un simple champ <b>début</b> (<i>correspondant à un pointeur vers le premier <b>maillon</b> de la <b>liste</b>\</i>). Cependant j'ai sauté l'étape des <b>listes</b> pour créer directement les <b>piles</b> (<i>Vu que les <b>piles</b> ne contiennent qu'une <b>liste</b>, cela revient à contenir un <b>maillon début</b>\</i>)
+</p>
+
+<p>
+Ensuite il faut créer 3 fonctions utilisant les <b>piles</b> qui seront nécessaires pour résoudre ce coding Game : <code>empile</code>, <code>depile</code> et <code>valeurTop</code> .Ces fonctions vont respectivement ajouter un char au dessus de la <b>pile</b> , enlever un char au dessus de la <b>pile</b> et nous donner la valeur du dessus de la <b>pile</b>.
+</p>
+
+</section>
+<section id="slide-org8c67778">
+<h4 id="org8c67778"><span class="section-number-4">2.2.2</span> Résolution</h4>
+<p>
+    Maintenant qu'on à des piles à notre disposition, on peut les utiliser pour résoudre ce problème. Pour cela on va regarder caractères par caractères et dès qu'on va croiser un <code>{</code>,~(~ ou <code>[</code> on va ajouter ce caractère dans notre <b>pile</b> <span class="underline">p</span> crée précédemment et ceux grâce à <code>empile</code>. Si on croise à l'inverse comme caractère <code>]</code>,~)~ ou <code>}</code>, on va regarder grâce à <code>valeurTop</code> si notre char dans la <b>pile</b> <span class="underline">p</span> corresponds au même brackets (<i>mais cette fois-ci le brackets ouvrant</i>).
+Si oui on <code>depile</code> <span class="underline">p</span>, sinon on ne fait rien. Ainsi si toutes nos brackets forment une expression correcte, la pile sera forcément vide. Il suffit donc de ragarder à la fin de l'expression si la <b>pile</b> <span class="underline">p</span> est vide.Si elle l'est alors l'expression est correcte est on peu renvoyé true, sinon on renvoie false. 
+</p>
+
+<p>
+Cependant un cas particulier peut poser problème, si l n'y a aucun <code>{</code> <code>[</code> ou <code>(</code> , la <b>pile</b> ne se remplira jamais (<i>vu qu'on appellera jamais <code>empile</code></i>). Il faut donc s'assurer qu'il y en a au moins un.
+</p>
+
+
+<div class="org-src-container">
+
+<pre  class="src src-C"><code trim>
+<span style="color: #94BFF3;">#include</span> <span style="color: #DCDCCC;">&lt;</span><span style="color: #CC9393;">stdlib.h</span><span style="color: #DCDCCC;">&gt;</span>
+<span style="color: #94BFF3;">#include</span> <span style="color: #DCDCCC;">&lt;</span><span style="color: #CC9393;">stdio.h</span><span style="color: #DCDCCC;">&gt;</span>
+<span style="color: #94BFF3;">#include</span> <span style="color: #DCDCCC;">&lt;</span><span style="color: #CC9393;">string.h</span><span style="color: #DCDCCC;">&gt;</span>
+<span style="color: #94BFF3;">#include</span> <span style="color: #DCDCCC;">&lt;</span><span style="color: #CC9393;">stdbool.h</span><span style="color: #DCDCCC;">&gt;</span>
+
+<span style="color: #F0DFAF; font-weight: bold;">struct</span> <span style="color: #7CB8BB; font-weight: bold;">maillon</span>
+<span style="color: #DCDCCC;">{</span>
+  <span style="color: #F0DFAF; font-weight: bold;">struct</span> <span style="color: #7CB8BB; font-weight: bold;">maillon</span>* <span style="color: #DFAF8F;">suivant</span>;
+  <span style="color: #7CB8BB; font-weight: bold;">char</span> <span style="color: #DFAF8F;">caracteres</span>;
+<span style="color: #DCDCCC;">}</span>;
+
+<span style="color: #F0DFAF; font-weight: bold;">typedef</span> <span style="color: #F0DFAF; font-weight: bold;">struct</span> <span style="color: #7CB8BB; font-weight: bold;">maillon</span> <span style="color: #7CB8BB; font-weight: bold;">maillon</span>;
+
+<span style="color: #F0DFAF; font-weight: bold;">struct</span> <span style="color: #7CB8BB; font-weight: bold;">pile</span>
+<span style="color: #DCDCCC;">{</span>
+  <span style="color: #7CB8BB; font-weight: bold;">maillon</span>* <span style="color: #DFAF8F;">debut</span>;
+<span style="color: #DCDCCC;">}</span>;
+
+<span style="color: #F0DFAF; font-weight: bold;">typedef</span> <span style="color: #F0DFAF; font-weight: bold;">struct</span> <span style="color: #7CB8BB; font-weight: bold;">pile</span> <span style="color: #7CB8BB; font-weight: bold;">pile</span>;
+
+<span style="color: #7CB8BB; font-weight: bold;">void</span> <span style="color: #93E0E3;">empile</span><span style="color: #DCDCCC;">(</span><span style="color: #7CB8BB; font-weight: bold;">pile</span>* <span style="color: #DFAF8F;">p</span>, <span style="color: #7CB8BB; font-weight: bold;">maillon</span>* <span style="color: #DFAF8F;">c</span><span style="color: #DCDCCC;">)</span>
+<span style="color: #DCDCCC;">{</span>
+  <span style="color: #F0DFAF; font-weight: bold;">if</span><span style="color: #BFEBBF;">(</span>p-&gt;debut == <span style="color: #BFEBBF;">NULL</span><span style="color: #BFEBBF;">)</span>
+    <span style="color: #BFEBBF;">{</span>
+      p-&gt;debut = c;
+      c-&gt;suivant = <span style="color: #BFEBBF;">NULL</span>;
+
+    <span style="color: #BFEBBF;">}</span>
+  <span style="color: #F0DFAF; font-weight: bold;">else</span>
+    <span style="color: #BFEBBF;">{</span>
+      <span style="color: #7CB8BB; font-weight: bold;">maillon</span>* <span style="color: #DFAF8F;">premier</span> = p-&gt;debut;
+      p-&gt;debut = c;
+      c-&gt;suivant = premier;
+    <span style="color: #BFEBBF;">}</span>
+  <span style="color: #7CB8BB; font-weight: bold;">maillon</span>* <span style="color: #DFAF8F;">maillonEncours</span> = p-&gt;debut;
+
+  <span style="color: #F0DFAF; font-weight: bold;">while</span> <span style="color: #BFEBBF;">(</span>maillonEncours != <span style="color: #BFEBBF;">NULL</span><span style="color: #BFEBBF;">)</span>
+    <span style="color: #BFEBBF;">{</span>
+
+      maillonEncours = maillonEncours-&gt;suivant;
+    <span style="color: #BFEBBF;">}</span>
+<span style="color: #DCDCCC;">}</span>
+
+<span style="color: #7CB8BB; font-weight: bold;">void</span> <span style="color: #93E0E3;">depile</span><span style="color: #DCDCCC;">(</span><span style="color: #7CB8BB; font-weight: bold;">pile</span>* <span style="color: #DFAF8F;">p</span><span style="color: #DCDCCC;">)</span>
+<span style="color: #DCDCCC;">{</span>
+
+  <span style="color: #F0DFAF; font-weight: bold;">if</span><span style="color: #BFEBBF;">(</span>p-&gt;debut != <span style="color: #BFEBBF;">NULL</span><span style="color: #BFEBBF;">)</span>
+    <span style="color: #BFEBBF;">{</span>
+      p-&gt;debut = p-&gt;debut-&gt;suivant;
+    <span style="color: #BFEBBF;">}</span>
+
+<span style="color: #DCDCCC;">}</span>
+<span style="color: #7CB8BB; font-weight: bold;">char</span> <span style="color: #93E0E3;">ValeurTop</span><span style="color: #DCDCCC;">(</span><span style="color: #7CB8BB; font-weight: bold;">pile</span>* <span style="color: #DFAF8F;">p</span><span style="color: #DCDCCC;">)</span>
+<span style="color: #DCDCCC;">{</span>
+  <span style="color: #F0DFAF; font-weight: bold;">if</span><span style="color: #BFEBBF;">(</span>p-&gt;debut !=<span style="color: #BFEBBF;">NULL</span><span style="color: #BFEBBF;">)</span>
+    <span style="color: #BFEBBF;">{</span>
+      <span style="color: #F0DFAF; font-weight: bold;">return</span> p-&gt;debut-&gt;caracteres;
+    <span style="color: #BFEBBF;">}</span>
+  <span style="color: #F0DFAF; font-weight: bold;">return</span> <span style="color: #CC9393;">'0'</span>;
+
+<span style="color: #DCDCCC;">}</span>
+
+<span style="color: #7CB8BB; font-weight: bold;">int</span> <span style="color: #93E0E3;">main</span><span style="color: #DCDCCC;">()</span>
+<span style="color: #DCDCCC;">{</span>
+  <span style="color: #7CB8BB; font-weight: bold;">bool</span> <span style="color: #DFAF8F;">bracketsEntrees</span> = <span style="color: #BFEBBF;">false</span>;
+  <span style="color: #7CB8BB; font-weight: bold;">pile</span> <span style="color: #DFAF8F;">p</span> = <span style="color: #BFEBBF;">{</span><span style="color: #BFEBBF;">NULL</span><span style="color: #BFEBBF;">}</span>;
+  <span style="color: #7CB8BB; font-weight: bold;">char</span> <span style="color: #DFAF8F;">expression</span><span style="color: #BFEBBF;">[</span>2049<span style="color: #BFEBBF;">]</span>;
+  scanf<span style="color: #BFEBBF;">(</span><span style="color: #CC9393;">"%s"</span>, expression<span style="color: #BFEBBF;">)</span>;
+  <span style="color: #7CB8BB; font-weight: bold;">int</span> <span style="color: #DFAF8F;">taille</span> = strlen<span style="color: #BFEBBF;">(</span>expression<span style="color: #BFEBBF;">)</span>;
+  <span style="color: #F0DFAF; font-weight: bold;">for</span><span style="color: #BFEBBF;">(</span><span style="color: #7CB8BB; font-weight: bold;">int</span> <span style="color: #DFAF8F;">i</span> = 0; i&lt;taille;i++<span style="color: #BFEBBF;">)</span>
+    <span style="color: #BFEBBF;">{</span>
+      <span style="color: #F0DFAF; font-weight: bold;">if</span> <span style="color: #D0BF8F;">(</span>expression<span style="color: #93E0E3;">[</span>i<span style="color: #93E0E3;">]</span> == <span style="color: #CC9393;">'{'</span> || expression<span style="color: #93E0E3;">[</span>i<span style="color: #93E0E3;">]</span> == <span style="color: #CC9393;">'['</span> || expression<span style="color: #93E0E3;">[</span>i<span style="color: #93E0E3;">]</span> == <span style="color: #CC9393;">'('</span><span style="color: #D0BF8F;">)</span>
+        <span style="color: #D0BF8F;">{</span>
+          bracketsEntrees = <span style="color: #BFEBBF;">true</span>;
+          <span style="color: #5F7F5F;">// </span><span style="color: #7F9F7F;">maillon m = {NULL,expression[i]};</span>
+          <span style="color: #7CB8BB; font-weight: bold;">maillon</span> * <span style="color: #DFAF8F;">m</span>;
+          m= <span style="color: #93E0E3;">(</span><span style="color: #7CB8BB; font-weight: bold;">maillon</span> *<span style="color: #93E0E3;">)</span> malloc<span style="color: #93E0E3;">(</span>1*<span style="color: #F0DFAF; font-weight: bold;">sizeof</span><span style="color: #9FC59F;">(</span>maillon<span style="color: #9FC59F;">)</span><span style="color: #93E0E3;">)</span>;
+          m-&gt;suivant = <span style="color: #BFEBBF;">NULL</span>;
+          m-&gt;caracteres = expression<span style="color: #93E0E3;">[</span>i<span style="color: #93E0E3;">]</span>;
+          empile<span style="color: #93E0E3;">(</span>&amp;p,m<span style="color: #93E0E3;">)</span>;
+        <span style="color: #D0BF8F;">}</span>
+      <span style="color: #F0DFAF; font-weight: bold;">else</span> <span style="color: #F0DFAF; font-weight: bold;">if</span><span style="color: #D0BF8F;">(</span>expression<span style="color: #93E0E3;">[</span>i<span style="color: #93E0E3;">]</span>-1 ==  ValeurTop<span style="color: #93E0E3;">(</span>&amp;p<span style="color: #93E0E3;">)</span> || expression<span style="color: #93E0E3;">[</span>i<span style="color: #93E0E3;">]</span> -2 == ValeurTop<span style="color: #93E0E3;">(</span>&amp;p<span style="color: #93E0E3;">)</span><span style="color: #D0BF8F;">)</span>
+        <span style="color: #D0BF8F;">{</span>
+
+          depile<span style="color: #93E0E3;">(</span>&amp;p<span style="color: #93E0E3;">)</span>;
+        <span style="color: #D0BF8F;">}</span>
+
+    <span style="color: #BFEBBF;">}</span>
+
+  <span style="color: #F0DFAF; font-weight: bold;">if</span><span style="color: #BFEBBF;">(</span>p.debut == <span style="color: #BFEBBF;">NULL</span> &amp;&amp; bracketsEntrees == <span style="color: #BFEBBF;">true</span><span style="color: #BFEBBF;">)</span>
+    <span style="color: #BFEBBF;">{</span>
+      printf<span style="color: #D0BF8F;">(</span><span style="color: #CC9393;">"true\n"</span><span style="color: #D0BF8F;">)</span>;
+    <span style="color: #BFEBBF;">}</span>
+  <span style="color: #F0DFAF; font-weight: bold;">else</span>
+    <span style="color: #BFEBBF;">{</span>
+      printf<span style="color: #D0BF8F;">(</span><span style="color: #CC9393;">"false\n"</span><span style="color: #D0BF8F;">)</span>;
+    <span style="color: #BFEBBF;">}</span>
+
+  <span style="color: #F0DFAF; font-weight: bold;">return</span> 0;
+<span style="color: #DCDCCC;">}</span>
+
+</code></pre>
+</div>
+
+</section>
+<section id="slide-org1a4c4fd">
+<h3 id="org1a4c4fd"><span class="section-number-3">2.3</span> Vérification de mon code</h3>
+<div class="outline-text-3" id="text-2-3">
+</div>
+</section>
+<section id="slide-org32bee90">
+<h4 id="org32bee90"><span class="section-number-4">2.3.1</span> Entrée du test à réaliser</h4>
+<p>
+<a href="file-IN.txt">file-IN.txt</a>
+</p>
+
+</section>
+<section id="slide-orgc661d7c">
+<h4 id="orgc661d7c"><span class="section-number-4">2.3.2</span> Mon résultat pour ce test</h4>
+<div class="org-src-container">
+
+<pre  class="src src-shell"><code trim>../brackets_EXTREME &lt; file-IN.txt
+</code></pre>
+</div>
+
+</section>
+<section id="slide-org76a5c51">
+<h4 id="org76a5c51"><span class="section-number-4">2.3.3</span> Résultat attendue pour ce test</h4>
+<pre class="example">
+true
+
+</pre>
+
+</section>
+<section id="slide-org891913e">
+<h4 id="org891913e"><span class="section-number-4">2.3.4</span> Comparaison des résultats</h4>
+<pre class="example">
+Même résultats
+
+</pre>
+
+</section>
+<section id="slide-org1ba2e86">
+<h3 id="org1ba2e86"><span class="section-number-3">2.4</span> Au niveau de la mémoire</h3>
+<p>
+Les images suivantes ont était récupérées à l'aide de ddd en lançant le programme <code>brackets</code> avec en entré <i>{[()]}</i> (correct) ou <i>{[(]}</i> (incorrect) . (<i><a href="#/slide-orgcf39d82">1</a>, <a href="#/slide-orgfb6693e">2</a>, <a href="#/slide-orgdc628ea">3</a>, <a href="#/slide-org31bccb0">4</a></i>). 
+</p>
+
+<ul>
+<li><a href="#/slide-orgcf39d82">1</a> représente la pile p au tout début,</li>
+<li><a href="#/slide-orgfb6693e">2</a> représente la pile p lorsque tous les empiles sont finis</li>
+<li><a href="#/slide-orgdc628ea">3</a> représente la pile p avant le print (si brackets correct)</li>
+<li><a href="#/slide-org31bccb0">4</a> représente la pile p avant le print (si brackets incorrect)</li>
+
+</ul>
+
+
+
+
+
+<div id="orgcf39d82" class="figure">
+<p><img src="./img/bracketsDebut.png" alt="bracketsDebut.png" />
+</p>
+<p><span class="figure-number">Figure 1: </span>répresentation de la pile p au début (avant les empiles)</p>
+</div>
+
+
+
+
+
+<div id="orgfb6693e" class="figure">
+<p><img src="./img/bracketsFinEmpile.png" alt="bracketsFinEmpile.png" />
+</p>
+<p><span class="figure-number">Figure 2: </span>répresentation de la pile p après les empiles (avant les depiles)</p>
+</div>
+
+
+
+
+
+<div id="orgdc628ea" class="figure">
+<p><img src="./img/bracketsFinTrue.png" alt="bracketsFinTrue.png" />
+</p>
+<p><span class="figure-number">Figure 3: </span>répresentation de la pile p avant le print (si brackets correct)</p>
+</div>
+
+
+
+
+
+<div id="org31bccb0" class="figure">
+<p><img src="./img/bracketsFinFalse.png" alt="bracketsFinFalse.png" />
+</p>
+<p><span class="figure-number">Figure 4: </span>répresentation de la pile p avant le print (si brackets incorrect)</p>
+</div>
+
+</section>
+<section id="slide-orgec90ae1">
+<h3 id="orgec90ae1"><span class="section-number-3">2.5</span> Solution</h3>
+<p>
+Solution apportée par <span class="underline">Alain Delpuch</span> :
+</p>
+
+
+<div class="org-src-container">
+
+<pre  class="src src-C"><code trim><span style="color: #94BFF3;">#include</span> <span style="color: #DCDCCC;">&lt;</span><span style="color: #CC9393;">stdio.h</span><span style="color: #DCDCCC;">&gt;</span>
+
+<span style="color: #F0DFAF; font-weight: bold;">const</span> <span style="color: #7CB8BB; font-weight: bold;">char</span> *<span style="color: #DFAF8F;">e</span>;
+
+<span style="color: #7CB8BB; font-weight: bold;">void</span> 
+<span style="color: #93E0E3;">parse</span><span style="color: #DCDCCC;">(</span><span style="color: #7CB8BB; font-weight: bold;">char</span> <span style="color: #DFAF8F;">until</span><span style="color: #DCDCCC;">)</span> <span style="color: #DCDCCC;">{</span>
+    <span style="color: #F0DFAF; font-weight: bold;">while</span><span style="color: #BFEBBF;">(</span>1<span style="color: #BFEBBF;">)</span> <span style="color: #BFEBBF;">{</span>
+        <span style="color: #7CB8BB; font-weight: bold;">char</span> <span style="color: #DFAF8F;">c</span> = *e++;
+        <span style="color: #F0DFAF; font-weight: bold;">if</span> <span style="color: #D0BF8F;">(</span>c == until<span style="color: #D0BF8F;">)</span> <span style="color: #F0DFAF; font-weight: bold;">return</span>;
+        <span style="color: #F0DFAF; font-weight: bold;">switch</span><span style="color: #D0BF8F;">(</span>c<span style="color: #D0BF8F;">)</span> <span style="color: #D0BF8F;">{</span>
+            <span style="color: #F0DFAF; font-weight: bold;">case</span> <span style="color: #CC9393;">'('</span> : parse<span style="color: #93E0E3;">(</span><span style="color: #CC9393;">')'</span><span style="color: #93E0E3;">)</span>; <span style="color: #F0DFAF; font-weight: bold;">break</span>;
+            <span style="color: #F0DFAF; font-weight: bold;">case</span> <span style="color: #CC9393;">'['</span> : parse<span style="color: #93E0E3;">(</span><span style="color: #CC9393;">']'</span><span style="color: #93E0E3;">)</span>; <span style="color: #F0DFAF; font-weight: bold;">break</span>;
+            <span style="color: #F0DFAF; font-weight: bold;">case</span> <span style="color: #CC9393;">'{'</span> : parse<span style="color: #93E0E3;">(</span><span style="color: #CC9393;">'}'</span><span style="color: #93E0E3;">)</span>; <span style="color: #F0DFAF; font-weight: bold;">break</span>;
+            <span style="color: #F0DFAF; font-weight: bold;">case</span>  0  :
+            <span style="color: #F0DFAF; font-weight: bold;">case</span> <span style="color: #CC9393;">')'</span> : 
+            <span style="color: #F0DFAF; font-weight: bold;">case</span> <span style="color: #CC9393;">']'</span> :
+            <span style="color: #F0DFAF; font-weight: bold;">case</span> <span style="color: #CC9393;">'}'</span> : printf<span style="color: #93E0E3;">(</span><span style="color: #CC9393;">"false\n"</span><span style="color: #93E0E3;">)</span>; exit<span style="color: #93E0E3;">(</span>1<span style="color: #93E0E3;">)</span>;
+        <span style="color: #D0BF8F;">}</span>
+    <span style="color: #BFEBBF;">}</span>
+<span style="color: #DCDCCC;">}</span>
+
+<span style="color: #93E0E3;">main</span><span style="color: #DCDCCC;">()</span> <span style="color: #DCDCCC;">{</span>
+    <span style="color: #7CB8BB; font-weight: bold;">char</span> <span style="color: #DFAF8F;">expression</span><span style="color: #BFEBBF;">[</span>2049<span style="color: #BFEBBF;">]</span>;
+    scanf<span style="color: #BFEBBF;">(</span><span style="color: #CC9393;">"%s"</span>, expression<span style="color: #BFEBBF;">)</span>;
+    e = expression ;
+    parse<span style="color: #BFEBBF;">(</span>0<span style="color: #BFEBBF;">)</span>; 
+    printf<span style="color: #BFEBBF;">(</span><span style="color: #CC9393;">"true\n"</span><span style="color: #BFEBBF;">)</span>;
+<span style="color: #DCDCCC;">}</span>
+</code></pre>
+</div>
+
+<p>
+Cette solution bien que assez compacte est dur à expliquer.On commence par la fonction main qui demande à l'utilisateur l'expression et le stock dans une autre variable globale <span class="underline">e</span>. Ensuite il appelle une fonction <code>parse</code> avec 0 comme argument (On verra à la fin pourquoi 0).
+</p>
+
+<p>
+Dans la fonction parse, on va regarder en boucle le prochain caractères dans l'expression(<i>même si on est dans un parse différent,par exemple si j'appelle mon parse une première fois et que j'en suis à regarder le 5 eme caractères de l'expression, si je rappelle une seconde fois mon parse, je vais directement regarder la 6 eme valeur, et non la première</i>). On va ensuite avoir 3 cas majeurs. Le cas où <span class="underline">c</span> est égale à <code>{</code> <code>(</code> ou <code>[</code> et c différent de <span class="underline">until</span> (<i>le paramètre du parse actuelle</i>), <span class="underline">c</span> = <code>]</code> <code>)</code> ou <code>}</code> et <span class="underline">c</span> != <span class="underline">until</span> et enfin <span class="underline">c</span> == <span class="underline">until</span>.
+</p>
+
+<ol>
+<li>Dans le premier cas on va appeler récursivement <code>parse</code> et cette fois ci avec comme argument le brackets paire à celle-ci. Comme ça si le prochain brackets que l'on voit et aussi le brackets paire, on va avoir <span class="underline">c</span> \=\= <span class="underline">until</span> (<i>donc l'expression respecte bien les conditions pour le moment</i>) ,on va se retrouver dans le 3 eme cas  et le <code>parse</code> appeler va donc arrêter de tourner. Mais si <span class="underline">c</span> != <span class="underline">until</span> On va se retrouver dans le 2 eme cas et le programme va retourner false.</li>
+
+<li>Dans ce cas le programme retournera quoi qu'il arrive false puisque les conditions ne sont pas respectées, en effet si on arrive à ce cas c'est soit que le brackets ouvert n'est pas le même que le brackets fermé (<i>c'est à dire qu'on provient du cas 1</i>), soit le <code>parse</code> actuelle est celui appelé dans le main, et dans ce cas notre expression commence par un brackets fermé, et il est donc impossible que les conditions soit respectés.</li>
+
+</ol>
+
+
+<ol>
+<li>Si on est dans ce cas, c'est alors que comme indiqué dans le cas 1, on à une bonne correspondance de pair.On va donc stopper le parse actuelle.</li>
+
+</ol>
+
+<p>
+Si toutes nos brackets sont correctes (et donc qu'on à seulement suivis le cas 1 et 3). On va se revenir à notre <code>parse(0)</code>. Cependant on ne vas pas tomber dans le cas 2 puisque étant arriver à la fin du tableau, la prochaine case aura comme contenu 0 (<i>puisque c'est une variable générale, du moins je l'espère car sinon j'ai rien compris</i>). Ainsi on va bien finir sur un cas 3. On va donc sortir du <code>parse(0)</code> et continuer le main, ou on va afficher true, Ce qui correspond bien au cas ou tous nos brackets sont correctes.
+</p>
+
+<p>
+La boucle while(1) permet de continuer à avancer dans l'expression si notre caractère actuelle n'est pas l'un des 7 cas présent (exemple 'R' ou '5').
+</p>
+
+<p>
+(Alain Delpuch je t'aime bien sauf lorsque tu fait de tel algorithme).
+</p>
+
+
+
+</section>
+</section>
+<section>
+<section id="slide-org545c493">
+<h2 id="org545c493"><span class="section-number-2">3</span> Lumen</h2>
+<p>
+<a href="https://www.codingame.com/training/easy/lumen">Lien vers le problème</a> 
+</p>
+
+</section>
+<section id="slide-orgeb04d3e">
+<h3 id="orgeb04d3e"><span class="section-number-3">3.1</span> Introduction</h3>
+<p>
+Imaginons une salle carrée de taille N avec des bougies éclairant chacune un carrée autour d'elle de longueur L.
+On cherche à savoir le nombre de cases sans lumière, c'est à dire celle n'étant pas dans le rayon d'action des bougies
+Notre algorithme doit renvoyer le nombre de cases non éclairés.
+</p>
+
+<p>
+Exemples: 
+</p>
+
+<p>
+Entrée:
+N=6 
+L=2
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">X</td>
+<td class="org-left">X</td>
+<td class="org-left">X</td>
+<td class="org-left">X</td>
+<td class="org-left">X</td>
+<td class="org-left">X</td>
+</tr>
+
+<tr>
+<td class="org-left">X</td>
+<td class="org-left">X</td>
+<td class="org-left">X</td>
+<td class="org-left">X</td>
+<td class="org-left">X</td>
+<td class="org-left">X</td>
+</tr>
+
+<tr>
+<td class="org-left">X</td>
+<td class="org-left">C</td>
+<td class="org-left">X</td>
+<td class="org-left">X</td>
+<td class="org-left">X</td>
+<td class="org-left">X</td>
+</tr>
+
+<tr>
+<td class="org-left">X</td>
+<td class="org-left">X</td>
+<td class="org-left">X</td>
+<td class="org-left">X</td>
+<td class="org-left">X</td>
+<td class="org-left">X</td>
+</tr>
+
+<tr>
+<td class="org-left">X</td>
+<td class="org-left">X</td>
+<td class="org-left">X</td>
+<td class="org-left">C</td>
+<td class="org-left">X</td>
+<td class="org-left">X</td>
+</tr>
+
+<tr>
+<td class="org-left">X</td>
+<td class="org-left">X</td>
+<td class="org-left">X</td>
+<td class="org-left">X</td>
+<td class="org-left">X</td>
+<td class="org-left">X</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Sortie:
+</p>
+
+<p>
+19 
+</p>
+
+</section>
+<section id="slide-org7ed6f82">
+<h3 id="org7ed6f82"><span class="section-number-3">3.2</span> Principe de résolution</h3>
+<p>
+On stock le schéma fournit par l'utilisateur dans un tableau 2D *tabPiece *. 
+</p>
+
+<p>
+Ensuite on regarde case par case dans <b>tabPiece</b> à la recherche d'un 'C'. Si notre case actuelle est un 'C', on regarde les cases dans un rayon L autour de la case actuelle qu'on va remplir avec u 'L' à la place d'un 'X'. Cependant il faut s'assurer de 2 choses pendant cette étape:
+</p>
+
+<ul>
+<li>Il faut  s'assurer qu'on ne remplace pas un 'C' par un 'L', car on peut supprimer la prochaine bougie et donc rendre notre sortie fausse</li>
+<li>Il faut aussi s'assurer qu'on ne dépasse pas les bordures de notre tableau (<i>Par exemple si on à une bougie dans le coin supérieur gauche de notre schéma et que l'intensité de la lumiére est de 2. On ne pourra pas mettre 'L' au case avant notre bougie</i>).</li>
+
+</ul>
+
+<p>
+Il suffira ensuite de refaire un tour du tableau est de compter le nombre de 'X' restant, puis de l'afficher.
+</p>
+
+
+
+
+<div class="org-src-container">
+
+<pre  class="src src-C"><code trim><span style="color: #94BFF3;">#include</span> <span style="color: #DCDCCC;">&lt;</span><span style="color: #CC9393;">stdlib.h</span><span style="color: #DCDCCC;">&gt;</span>
+<span style="color: #94BFF3;">#include</span> <span style="color: #DCDCCC;">&lt;</span><span style="color: #CC9393;">stdio.h</span><span style="color: #DCDCCC;">&gt;</span>
+<span style="color: #94BFF3;">#include</span> <span style="color: #DCDCCC;">&lt;</span><span style="color: #CC9393;">string.h</span><span style="color: #DCDCCC;">&gt;</span>
+<span style="color: #94BFF3;">#include</span> <span style="color: #DCDCCC;">&lt;</span><span style="color: #CC9393;">stdbool.h</span><span style="color: #DCDCCC;">&gt;</span>
+
+<span style="color: #5F7F5F;">// </span><span style="color: #7F9F7F;">Est ce que les heures sup sont pay&#233;s en linux ?</span>
+
+<span style="color: #7CB8BB; font-weight: bold;">int</span> <span style="color: #93E0E3;">main</span><span style="color: #DCDCCC;">()</span>
+<span style="color: #DCDCCC;">{</span> 
+   <span style="color: #7CB8BB; font-weight: bold;">int</span> <span style="color: #DFAF8F;">N</span>;
+     scanf<span style="color: #BFEBBF;">(</span><span style="color: #CC9393;">"%d"</span>, &amp;N<span style="color: #BFEBBF;">)</span>;
+     <span style="color: #7CB8BB; font-weight: bold;">int</span> <span style="color: #DFAF8F;">L</span>;
+     scanf<span style="color: #BFEBBF;">(</span><span style="color: #CC9393;">"%d"</span>, &amp;L<span style="color: #BFEBBF;">)</span>; 
+     L--;
+
+     <span style="color: #7CB8BB; font-weight: bold;">char</span> ** <span style="color: #DFAF8F;">tabPiece</span> = <span style="color: #BFEBBF;">(</span><span style="color: #7CB8BB; font-weight: bold;">char</span>**<span style="color: #BFEBBF;">)</span> malloc<span style="color: #BFEBBF;">(</span><span style="color: #7CB8BB; font-weight: bold;">N</span>*<span style="color: #F0DFAF; font-weight: bold;">sizeof</span><span style="color: #D0BF8F;">(</span><span style="color: #7CB8BB; font-weight: bold;">char</span>*<span style="color: #D0BF8F;">)</span><span style="color: #BFEBBF;">)</span>;
+
+     <span style="color: #F0DFAF; font-weight: bold;">for</span><span style="color: #BFEBBF;">(</span><span style="color: #7CB8BB; font-weight: bold;">int</span> <span style="color: #DFAF8F;">i</span> = 0; i&lt;N;i++<span style="color: #BFEBBF;">)</span>
+     <span style="color: #BFEBBF;">{</span>
+     tabPiece<span style="color: #D0BF8F;">[</span>i<span style="color: #D0BF8F;">]</span> = <span style="color: #D0BF8F;">(</span><span style="color: #7CB8BB; font-weight: bold;">char</span>*<span style="color: #D0BF8F;">)</span> malloc<span style="color: #D0BF8F;">(</span><span style="color: #93E0E3;">(</span><span style="color: #9FC59F;">(</span>N+1<span style="color: #9FC59F;">)</span>*2<span style="color: #93E0E3;">)</span>*<span style="color: #F0DFAF; font-weight: bold;">sizeof</span><span style="color: #93E0E3;">(</span><span style="color: #7CB8BB; font-weight: bold;">char</span><span style="color: #93E0E3;">)</span><span style="color: #D0BF8F;">)</span>;
+     fgets<span style="color: #D0BF8F;">(</span>tabPiece<span style="color: #93E0E3;">[</span>i<span style="color: #93E0E3;">]</span>, N*2+1, stdin<span style="color: #D0BF8F;">)</span>;
+
+     <span style="color: #BFEBBF;">}</span>
+
+  <span style="color: #F0DFAF; font-weight: bold;">for</span> <span style="color: #BFEBBF;">(</span><span style="color: #7CB8BB; font-weight: bold;">int</span> <span style="color: #DFAF8F;">i</span> = 0;i&lt;N;i++<span style="color: #BFEBBF;">)</span>
+    <span style="color: #BFEBBF;">{</span>
+      <span style="color: #F0DFAF; font-weight: bold;">for</span> <span style="color: #D0BF8F;">(</span><span style="color: #7CB8BB; font-weight: bold;">int</span> <span style="color: #DFAF8F;">j</span> = 0;j &lt; N*2;j+=2<span style="color: #D0BF8F;">)</span>
+        <span style="color: #D0BF8F;">{</span>
+          <span style="color: #F0DFAF; font-weight: bold;">if</span> <span style="color: #93E0E3;">(</span>tabPiece<span style="color: #9FC59F;">[</span>i<span style="color: #9FC59F;">][</span>j<span style="color: #9FC59F;">]</span> == <span style="color: #CC9393;">'C'</span><span style="color: #93E0E3;">)</span>
+            <span style="color: #93E0E3;">{</span>
+              <span style="color: #7CB8BB; font-weight: bold;">int</span> <span style="color: #DFAF8F;">l</span>;
+              <span style="color: #7CB8BB; font-weight: bold;">int</span> <span style="color: #DFAF8F;">L2</span>;
+              <span style="color: #7CB8BB; font-weight: bold;">int</span> <span style="color: #DFAF8F;">limite</span>;
+              <span style="color: #7CB8BB; font-weight: bold;">int</span> <span style="color: #DFAF8F;">Limite</span>;
+
+              l = i-L &gt;= 0 ? i-L : 0;
+              L2 = j-L*2 &gt;= 0 ? j-L*2 : 0;
+              limite = i+L &lt; N ? i+L : N-1;
+              Limite =  j+L*2 &lt; N*2 ? j+L*2 : N*2-1;
+
+              <span style="color: #F0DFAF; font-weight: bold;">for</span><span style="color: #9FC59F;">(</span><span style="color: #7CB8BB; font-weight: bold;">int</span> <span style="color: #DFAF8F;">u</span> = l;u &lt;= limite;u++<span style="color: #9FC59F;">)</span>
+                <span style="color: #9FC59F;">{</span>
+                  <span style="color: #F0DFAF; font-weight: bold;">for</span> <span style="color: #94BFF3;">(</span><span style="color: #7CB8BB; font-weight: bold;">int</span> <span style="color: #DFAF8F;">v</span> = L2; v &lt;=Limite;v+=2<span style="color: #94BFF3;">)</span>
+                    <span style="color: #94BFF3;">{</span>
+                      <span style="color: #F0DFAF; font-weight: bold;">if</span><span style="color: #E0CF9F;">(</span>tabPiece<span style="color: #8FB28F;">[</span>u<span style="color: #8FB28F;">][</span>v<span style="color: #8FB28F;">]</span> != <span style="color: #CC9393;">'C'</span><span style="color: #E0CF9F;">)</span>
+                        <span style="color: #E0CF9F;">{</span>
+                          tabPiece<span style="color: #8FB28F;">[</span>u<span style="color: #8FB28F;">][</span>v<span style="color: #8FB28F;">]</span> = <span style="color: #CC9393;">'L'</span>;
+                        <span style="color: #E0CF9F;">}</span>
+                    <span style="color: #94BFF3;">}</span>
+                <span style="color: #9FC59F;">}</span>
+
+            <span style="color: #93E0E3;">}</span>
+        <span style="color: #D0BF8F;">}</span>
+    <span style="color: #BFEBBF;">}</span>
+
+  <span style="color: #7CB8BB; font-weight: bold;">int</span> <span style="color: #DFAF8F;">nbr</span> = 0;
+  <span style="color: #F0DFAF; font-weight: bold;">for</span> <span style="color: #BFEBBF;">(</span><span style="color: #7CB8BB; font-weight: bold;">int</span> <span style="color: #DFAF8F;">i</span> =0; i &lt; N;i++<span style="color: #BFEBBF;">)</span>
+    <span style="color: #BFEBBF;">{</span>
+      <span style="color: #5F7F5F;">//</span><span style="color: #7F9F7F;">printf("&gt;&gt;&gt;%s\n",tabPiece[i]);</span>
+      <span style="color: #F0DFAF; font-weight: bold;">for</span> <span style="color: #D0BF8F;">(</span><span style="color: #7CB8BB; font-weight: bold;">int</span> <span style="color: #DFAF8F;">j</span> = 0; j &lt; N*2;j++<span style="color: #D0BF8F;">)</span>
+        <span style="color: #D0BF8F;">{</span>
+          <span style="color: #F0DFAF; font-weight: bold;">if</span> <span style="color: #93E0E3;">(</span>tabPiece<span style="color: #9FC59F;">[</span>i<span style="color: #9FC59F;">][</span>j<span style="color: #9FC59F;">]</span> == <span style="color: #CC9393;">'X'</span><span style="color: #93E0E3;">)</span>
+            <span style="color: #93E0E3;">{</span>
+              nbr++;
+            <span style="color: #93E0E3;">}</span>
+        <span style="color: #D0BF8F;">}</span>
+    <span style="color: #BFEBBF;">}</span>
+
+  printf<span style="color: #BFEBBF;">(</span><span style="color: #CC9393;">"%d\n"</span>,nbr<span style="color: #BFEBBF;">)</span>;
+
+  <span style="color: #F0DFAF; font-weight: bold;">return</span> 0;
+<span style="color: #DCDCCC;">}</span>
+
+</code></pre>
+</div>
+
+</section>
+<section id="slide-org8c059dc">
+<h3 id="org8c059dc"><span class="section-number-3">3.3</span> Vérification de mon code</h3>
+<div class="outline-text-3" id="text-3-3">
+</div>
+</section>
+<section id="slide-org22c7664">
+<h4 id="org22c7664"><span class="section-number-4">3.3.1</span> Entrée du test à réaliser</h4>
+<p>
+<a href="file-IN.txt">file-IN.txt</a>
+</p>
+
+</section>
+<section id="slide-orgdd135f2">
+<h4 id="orgdd135f2"><span class="section-number-4">3.3.2</span> Mon résultat pour ce test</h4>
+<div class="org-src-container">
+
+<pre  class="src src-shell"><code trim>../lumen &lt; file-IN.txt
+</code></pre>
+</div>
+
+<pre class="example">
+90
+
+</pre>
+
+</section>
+<section id="slide-org843e10f">
+<h4 id="org843e10f"><span class="section-number-4">3.3.3</span> Résultat attendue pour ce test</h4>
+<pre class="example">
+90
+
+</pre>
+
+</section>
+<section id="slide-org76a2c1c">
+<h4 id="org76a2c1c"><span class="section-number-4">3.3.4</span> Comparaison des résultats</h4>
+<pre class="example">
+Même résultats
+
+</pre>
+
+</section>
+<section id="slide-org11f44ab">
+<h3 id="org11f44ab"><span class="section-number-3">3.4</span> Au niveau de la mémoire</h3>
+<p>
+Les images suivantes ont était récupérées à l'aide de ddd en lançant le programme <code>lumen</code> avec en entré :
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">5</th>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-left">&#xa0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">2</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">X</td>
+<td class="org-left">X</td>
+<td class="org-left">X</td>
+<td class="org-left">X</td>
+<td class="org-left">X</td>
+</tr>
+
+<tr>
+<td class="org-left">X</td>
+<td class="org-left">C</td>
+<td class="org-left">X</td>
+<td class="org-left">X</td>
+<td class="org-left">X</td>
+</tr>
+
+<tr>
+<td class="org-left">X</td>
+<td class="org-left">X</td>
+<td class="org-left">X</td>
+<td class="org-left">X</td>
+<td class="org-left">X</td>
+</tr>
+
+<tr>
+<td class="org-left">X</td>
+<td class="org-left">X</td>
+<td class="org-left">X</td>
+<td class="org-left">X</td>
+<td class="org-left">C</td>
+</tr>
+
+<tr>
+<td class="org-left">X</td>
+<td class="org-left">X</td>
+<td class="org-left">X</td>
+<td class="org-left">X</td>
+<td class="org-left">X</td>
+</tr>
+</tbody>
+</table>
+
+
+<ul>
+<li><a href="#/slide-org302a5ae">5</a> représente le tableau 2D tabPiece après la saisie de l'utilisateur</li>
+<li><a href="#/slide-org2094a00">6</a> représente le tableau 2D tabPiece après modification par l'algorithme</li>
+<li><a href="#/slide-org0f7cc55">7</a>  représente le tableau 2D tabPiece à la fin de l'algorithme</li>
+
+</ul>
+
+
+
+<div id="org302a5ae" class="figure">
+<p><img src="./img/lumenSchémaDébut.png" alt="lumenSchémaDébut.png" />
+</p>
+<p><span class="figure-number">Figure 5: </span>représentation du tableau 2D tabPiece après la saisie de l'utilisateur</p>
+</div>
+
+
+
+
+<div id="org2094a00" class="figure">
+<p><img src="./img/lumenSchémaModifier.png" alt="lumenSchémaModifier.png" />
+</p>
+<p><span class="figure-number">Figure 6: </span>représentation du tableau 2D tabPiece après modification par le programme</p>
+</div>
+
+
+
+
+
+<div id="org0f7cc55" class="figure">
+<p><img src="./img/lumenFin.png" alt="lumenFin.png" />
+</p>
+<p><span class="figure-number">Figure 7: </span>représentation de la mémoire à la fin de l'algorithme</p>
+</div>
+
+
+
+</section>
+<section id="slide-orgbf881af">
+<h3 id="orgbf881af"><span class="section-number-3">3.5</span> Solution</h3>
+<p>
+Solution de Alain-Delpuch 
+</p>
+
+<div class="org-src-container">
+
+<pre  class="src src-C"><code trim><span style="color: #5F7F5F;">// </span><span style="color: #7F9F7F;">------------------------------------------------------------------</span>
+<span style="color: #5F7F5F;">//                                                              </span><span style="color: #7F9F7F;">Lumen</span>
+<span style="color: #5F7F5F;">// </span><span style="color: #7F9F7F;">------------------------------------------------------------------</span>
+<span style="color: #94BFF3;">#include</span> <span style="color: #DCDCCC;">&lt;</span><span style="color: #CC9393;">stdio.h</span><span style="color: #DCDCCC;">&gt;</span>
+<span style="color: #5F7F5F;">// </span><span style="color: #7F9F7F;">------------------------------------------------------------------</span>
+<span style="color: #7CB8BB; font-weight: bold;">int</span> <span style="color: #DFAF8F;">map</span><span style="color: #DCDCCC;">[</span>25<span style="color: #DCDCCC;">][</span>25<span style="color: #DCDCCC;">]</span>;
+<span style="color: #7CB8BB; font-weight: bold;">int</span> <span style="color: #DFAF8F;">N</span>,<span style="color: #DFAF8F;">L</span>;
+<span style="color: #5F7F5F;">// </span><span style="color: #7F9F7F;">------------------------------------------------------------------</span>
+<span style="color: #7CB8BB; font-weight: bold;">void</span>
+<span style="color: #93E0E3;">F</span><span style="color: #DCDCCC;">(</span><span style="color: #7CB8BB; font-weight: bold;">unsigned</span>  <span style="color: #7CB8BB; font-weight: bold;">int</span> <span style="color: #DFAF8F;">i</span>, <span style="color: #7CB8BB; font-weight: bold;">unsigned</span> <span style="color: #7CB8BB; font-weight: bold;">int</span> <span style="color: #DFAF8F;">j</span>, <span style="color: #7CB8BB; font-weight: bold;">int</span> <span style="color: #DFAF8F;">l</span><span style="color: #DCDCCC;">){</span>
+    <span style="color: #F0DFAF; font-weight: bold;">if</span> <span style="color: #BFEBBF;">(</span> i &gt;= N || j &gt;= N || l &lt; map<span style="color: #D0BF8F;">[</span>i<span style="color: #D0BF8F;">][</span>j<span style="color: #D0BF8F;">]</span> <span style="color: #BFEBBF;">)</span> <span style="color: #F0DFAF; font-weight: bold;">return</span>;
+    map<span style="color: #BFEBBF;">[</span>i<span style="color: #BFEBBF;">][</span>j<span style="color: #BFEBBF;">]</span> = l--;
+    F<span style="color: #BFEBBF;">(</span> i-1 , j-1 , l<span style="color: #BFEBBF;">)</span> ; F<span style="color: #BFEBBF;">(</span> i-1 , j   , l<span style="color: #BFEBBF;">)</span> ; F<span style="color: #BFEBBF;">(</span> i-1 , j+1 , l<span style="color: #BFEBBF;">)</span> ; 
+    F<span style="color: #BFEBBF;">(</span> i   , j-1 , l<span style="color: #BFEBBF;">)</span> ;                   ; F<span style="color: #BFEBBF;">(</span> i   , j+1 , l<span style="color: #BFEBBF;">)</span> ; 
+    F<span style="color: #BFEBBF;">(</span> i+1 , j-1 , l<span style="color: #BFEBBF;">)</span> ; F<span style="color: #BFEBBF;">(</span> i+1 , j   , l<span style="color: #BFEBBF;">)</span> ; F<span style="color: #BFEBBF;">(</span> i+1 , j+1 , l<span style="color: #BFEBBF;">)</span> ; 
+<span style="color: #DCDCCC;">}</span>
+<span style="color: #5F7F5F;">// </span><span style="color: #7F9F7F;">------------------------------------------------------------------</span>
+<span style="color: #93E0E3;">main</span><span style="color: #DCDCCC;">()</span> <span style="color: #DCDCCC;">{</span>
+    scanf<span style="color: #BFEBBF;">(</span><span style="color: #CC9393;">"%d %d\n"</span>, &amp;N, &amp;L<span style="color: #BFEBBF;">)</span>;
+    <span style="color: #F0DFAF; font-weight: bold;">for</span> <span style="color: #BFEBBF;">(</span><span style="color: #7CB8BB; font-weight: bold;">int</span> <span style="color: #DFAF8F;">i</span> = 0; i &lt; N; i++<span style="color: #BFEBBF;">)</span> <span style="color: #BFEBBF;">{</span>
+        <span style="color: #F0DFAF; font-weight: bold;">for</span> <span style="color: #D0BF8F;">(</span><span style="color: #7CB8BB; font-weight: bold;">int</span> <span style="color: #DFAF8F;">j</span> = 0; j &lt; N; j++<span style="color: #D0BF8F;">)</span> <span style="color: #D0BF8F;">{</span>
+            <span style="color: #7CB8BB; font-weight: bold;">char</span> <span style="color: #DFAF8F;">buf</span><span style="color: #93E0E3;">[</span>2<span style="color: #93E0E3;">]</span>;
+            scanf<span style="color: #93E0E3;">(</span><span style="color: #CC9393;">"%s"</span>,buf<span style="color: #93E0E3;">)</span>;
+            F<span style="color: #93E0E3;">(</span> i , j , *buf==<span style="color: #CC9393;">'X'</span> ? 0 : L<span style="color: #93E0E3;">)</span>;
+        <span style="color: #D0BF8F;">}</span>
+    <span style="color: #BFEBBF;">}</span>
+    <span style="color: #7CB8BB; font-weight: bold;">int</span> <span style="color: #DFAF8F;">result</span> = 0;
+    <span style="color: #F0DFAF; font-weight: bold;">for</span> <span style="color: #BFEBBF;">(</span><span style="color: #7CB8BB; font-weight: bold;">int</span> <span style="color: #DFAF8F;">i</span> = 0; i &lt; N; i++<span style="color: #BFEBBF;">)</span> <span style="color: #BFEBBF;">{</span>
+        <span style="color: #F0DFAF; font-weight: bold;">for</span> <span style="color: #D0BF8F;">(</span><span style="color: #7CB8BB; font-weight: bold;">int</span> <span style="color: #DFAF8F;">j</span> = 0; j &lt; N; j++<span style="color: #D0BF8F;">)</span> <span style="color: #D0BF8F;">{</span>
+            result += map<span style="color: #93E0E3;">[</span>i<span style="color: #93E0E3;">][</span>j<span style="color: #93E0E3;">]</span> == 0;
+        <span style="color: #D0BF8F;">}</span>
+    <span style="color: #BFEBBF;">}</span>
+    printf<span style="color: #BFEBBF;">(</span><span style="color: #CC9393;">"%d"</span>,result<span style="color: #BFEBBF;">)</span>;
+<span style="color: #DCDCCC;">}</span>
+</code></pre>
+</div>
+
+
+<p>
+Dans cette algorithme, on prends chaque caractère un par un, puis en fonction de si cette case contient 'C' ou 'X', on appelle la fonction <code>F</code> avec comme argument le numéro de ligne et de colonne de la case, puis <span class="underline">L</span> ou 0 (si la case contient 'C' ou 'X' )
+</p>
+
+<p>
+La fonction <code>F</code> va appliquer <span class="underline">l</span> (son 3 eme argument) à la case actelle puis elle va réappliquer la fonction <code>F</code> (<i>avec <span class="underline">l</span>&#x2013; cette fois-ci</i>) pour toutes les cases autour et ceux jusqu'à ce que <span class="underline">l</span> soit strictement inférieur à la valeur dans la case actuelle (avec toutes les cases initialisé à 0) ou qu'on dépasse la limite du tableau. Cela permet par exemple si <span class="underline">L</span> = 3 de remplir la case au centre avec 2, puis celle en périphérie par 1(<i>tout en faisant attention de ne pas remplacer le 2 au centre</i>).
+</p>
+
+<p>
+On applique cette méthode pour toutes les case du schéma. Il suffit donc ensuite de calculer le nombre de fois où une case est égale à 0 dans notre tableau 2D <span class="underline">map</span> et de l'afficher. 
+</p>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org8392e77">
+<h2 id="org8392e77"><span class="section-number-2">4</span> Autre fichier</h2>
+<div class="outline-text-2" id="text-4">
+</div>
+</section>
+<section id="slide-org7cc7a9c">
+<h4 id="org7cc7a9c"><span class="section-number-4">4.0.1</span> Différentes version de ce document</h4>
+<p>
+<a href="./compte_rendu.org">Ce même document en org mode</a>
+</p>
+
+<p>
+<a href="./compte_rendu.tex">Ce même document en latex</a> 
+(<a href="./compte_rendu.pdf">le pdf ici</a>)
+</p>
+
+<p>
+<a href="./compte_rendu.html">Ce même document en html</a>
+</p>
+
+<p>
+<a href="./compte_rendu_reveal.html">Ce même document en &#x2026; reveal</a>
+</p>
+
+</section>
+<section id="slide-org9b1616a">
+<h4 id="org9b1616a"><span class="section-number-4">4.0.2</span> Mes fichiers IN et OUT</h4>
+<p>
+<a href="./brackets_IN.txt">./brackets_IN.txt</a>
+<a href="./brackets_OUT.txt">./brackets_OUT.txt</a>
+<a href="./lumen_IN.txt">./lumen_IN.txt</a> 
+<a href="./lumen_OUT.txt">./lumen_OUT.txt</a>
+</p>
+</section>
+</section>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/js/reveal.js"></script>
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+multiplex: {
+    secret: '', // null if client
+    id: '', // id, obtained from socket.io server
+    url: '' // Location of socket.io server
+},
+
+// Optional libraries used to extend on reveal.js
+dependencies: [
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }]
+});
+</script>
+</body>
+</html>

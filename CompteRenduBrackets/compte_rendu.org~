@@ -1,0 +1,160 @@
+#+TAGS: URGENT(u) @FAMILLE(f) @COURSES(c)
+
+
+#+TITLE: COMPTE RENDU
+=ox-twbs=
+#+INCLUDE: "~/codingGame/AL/bracklets_IN.txt"
+
+* Lumen
+
+#+HEADER: :var file_name="bracklets_IN.txt" 
+#+BEGIN_SRC C :var data=1 :exports result
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main ()
+{
+ 
+  FILE* f;
+  char chaine[100];
+  int num = data;
+
+ 
+  f = fopen(file_name ,"r");
+ 
+  
+    for(int i = 0; i < num-1 ; i++)
+      {
+	
+      while(strcmp(chaine,"NEXT\n"));
+      {
+	fgets(chaine,100,f);
+
+      }
+      }
+    
+  fgets(chaine,100,f);
+  
+  printf("%s\n",chaine);
+  return 0;
+}
+#+END_SRC
+
+#+name: string
+#+RESULTS:
+: NEXT
+
+
+
+
+#+Begin_src C :var data=string
+
+  #include <stdlib.h>
+  #include <stdio.h>
+  #include <string.h>
+  #include <stdbool.h>
+
+  struct maillon
+  {
+   struct maillon* suivant;
+    char caracteres;
+  };
+
+  typedef struct maillon maillon;
+
+  struct pile
+  {
+    maillon* debut;
+  };
+
+  typedef struct pile pile;
+
+  void empile(pile* p, maillon* c)
+  {
+    if(p->debut == NULL)
+      {
+	p->debut = c;
+	c->suivant = NULL;
+
+      }
+    else
+      {
+    maillon* premier = p->debut;
+    p->debut = c;
+      c->suivant = premier;
+      }
+    maillon* maillonEncours = p->debut;
+
+    while (maillonEncours != NULL)
+      {
+
+	maillonEncours = maillonEncours->suivant;
+	  }
+    }
+
+  void depile(pile* p)
+  {
+
+    if(p->debut != NULL)
+      {
+	p->debut = p->debut->suivant;
+      }
+
+  }
+  char ValeurTop(pile* p)
+  {
+    if(p->debut !=NULL)
+      {
+    return p->debut->caracteres;
+      }
+    return '0';
+
+  }
+
+  int main()
+  {
+    bool bracketsEntrees = false;
+    pile p = {NULL};
+      char expression[2049];
+    strcpy(expression,data);
+      //scanf("%s", expression);
+      int taille = strlen(expression);
+      for(int i = 0; i<taille;i++)
+	{
+	  if (expression[i] == '{' || expression[i] == '[' || expression[i] == '(')
+	    {
+	      bracketsEntrees = true;
+	      // maillon m = {NULL,expression[i]};
+	      maillon * m;
+	      m= (maillon *) malloc(1*sizeof(maillon));
+	      m->suivant = NULL;
+	      m->caracteres = expression[i];
+		empile(&p,m);
+	    }
+	  else if(expression[i]-1 ==  ValeurTop(&p) || expression[i] -2 == ValeurTop(&p))
+	    {
+
+	      depile(&p);
+	    }
+
+	}
+
+      if(p.debut == NULL && bracketsEntrees == true)
+	{
+	printf("true\n");
+	}
+	else
+	  {
+	  printf("false\n");
+	  }
+
+      return 0;
+  }
+
+#+END_SRC
+
+#+RESULTS:
+: true
+
+* Bracklets

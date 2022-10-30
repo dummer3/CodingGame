@@ -1,0 +1,23 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main ()
+
+{
+  FILE* f;
+  char chaine[50];
+  int num = data;
+
+  f = fopen("~/codingGame/AL/bracklets_IN","r");
+
+    for(int i = 0; i < num-1 ; i++)
+	
+      do {
+	  fgets(chaine,50,f)
+      }while (strcmp(chaine,"/\\n"));
+  fgets(chaine,50,f);
+  fgets(chaine, 50, f);
+  printf("%s\n",chaine );
+  return 0;
+}

@@ -1,0 +1,773 @@
+% Created 2020-05-27 mer. 18:11
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\author{cliquot}
+\date{\today}
+\title{COMPTE RENDU}
+\hypersetup{
+ pdfauthor={cliquot},
+ pdftitle={COMPTE RENDU},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 26.3 (Org mode 9.1.9)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+
+\section{Fonction utilisé}
+\label{sec:org42fd2df}
+
+\subsection{ObtenirOUT}
+\label{sec:org22b58bf}
+
+
+\begin{verbatim}
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main ()
+{
+
+  FILE* f;
+  char chaine[100];
+  int num = data;
+
+
+  f = fopen(file_name ,"r");
+
+
+  for(int i = 0; i < num ; i++)
+    {
+
+      do
+	{
+	  fgets(chaine,100,f);
+
+	} while(strcmp(chaine,"NEXT\n"));
+    }
+
+      fgets(chaine,100,f);
+  do 
+    {
+      printf("%s",chaine);
+      fgets(chaine,100,f);
+    }while(strcmp(chaine,"NEXT\n"));
+  return 0;
+}
+\end{verbatim}
+
+
+\subsection{ObtenirIN}
+\label{sec:orga93de5f}
+
+
+
+
+\begin{verbatim}
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main ()
+{
+
+  FILE* f;
+  char chaine[100];
+  int num = data;
+
+
+  f = fopen(file_name ,"r");
+
+
+  for(int i = 0; i < num ; i++)
+    {
+
+      do
+	{
+	  fgets(chaine,100,f);
+
+	} while(strcmp(chaine,"NEXT\n"));
+    }
+
+  fgets(chaine,100,f);
+  do 
+    {
+
+
+
+	  printf("%s",chaine);
+
+	fgets(chaine,100,f);
+	}while(strcmp(chaine,"NEXT\n"));
+      return 0;
+    }
+\end{verbatim}
+
+
+
+
+
+\subsection{ComparaisonString}
+\label{sec:org958c49b}
+
+\begin{verbatim}
+
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+
+int main()
+{
+char tab[50];
+strcpy(tab,!strcmp(v1,v2) ? "Même résultats" : "Résultats différents");
+
+printf("%s",tab);
+
+
+
+}
+\end{verbatim}
+
+
+\subsection{ComparaisonInt}
+\label{sec:org5718277}
+
+\begin{verbatim}
+
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+
+int main()
+{
+char tab[50];
+ strcpy(tab,v1 == v2 ? "Même résultats" : "Résultats différents" );
+
+printf("%s",tab);
+
+
+
+}
+\end{verbatim}
+
+
+
+
+\section{Brackets}
+\label{sec:org9787ad5}
+
+\href{https://www.codingame.com/training/easy/brackets-extreme-edition}{Lien vers le problème}
+
+\subsection{Introduction}
+\label{sec:orgfc5d397}
+
+Les brackets est un nom regroupant \texttt{les parenthéses ()}, \texttt{les
+crochets []} et \texttt{les accolades \{\}}. Le but de ce Coding Game est de
+savoir si nos brackets sont toujours appairés et imbriqué ( \emph{un [ avec un ] un \{
+avec un \}  etc\ldots{}} ) 
+
+Exemple :
+
+\begin{center}
+\begin{tabular}{lr}
+Expression & Résultat\\
+\hline
+\hline
+\{()\}[]() & Correct\\
+\{5R\}\{\}(()) & Correct\\
+\{\}[(]] & Incorrect\\
+\{([)]\} & Incorrect\\
+\end{tabular}
+\end{center}
+
+
+Lorsque notre résultat est correct, l'algorithme devra renvoyé true et
+false lorsque le résultat est incorrect
+
+\subsection{Principe de résolution}
+\label{sec:org0fc735f}
+
+J'ai opté pour résoudre ce problème l'utilisation de pile, même si il peut exister des solutions beaucoup plus optimisée (Code de Alain Delpuch). Cependant c'était un bonne entraînement d'intégrer ce type en C.
+
+\subsubsection{Création des piles}
+\label{sec:org706f944}
+
+Pour créer une structure \textbf{pile}, il nous faut d'abord créer la structure \textbf{liste}, et donc créer la structure \textbf{maillon}. Cependant comme je n'avais besoin nullement d'un avantage des \textbf{listes}, cette structure est directement intégré dans la structure \textbf{pile}  
+
+Des \textbf{maillons} simples suffisent, c'est à dire avec un champ \textbf{data} (\emph{ici data sera de type char}) et un autre champ \textbf{suivant} (\emph{qui sera un pointeur vers le \textbf{maillon} suivant}).
+
+
+La structure \textbf{liste} ne devrait normalement contenir qu'un simple champ \textbf{début} (\emph{correspondant à un pointeur vers le premier \textbf{maillon} de la \textbf{liste}$\backslash$}). Cependant j'ai sauté l'étape des \textbf{listes} pour créer directement les \textbf{piles} (\emph{Vu que les \textbf{piles} ne contiennent qu'une \textbf{liste}, cela revient à contenir un \textbf{maillon début}$\backslash$})
+
+Ensuite il faut créer 3 fonctions utilisant les \textbf{piles} qui seront nécessaires pour résoudre ce coding Game : \texttt{empile}, \texttt{depile} et \texttt{valeurTop} .Ces fonctions vont respectivement ajouter un char au dessus de la \textbf{pile} , enlever un char au dessus de la \textbf{pile} et nous donner la valeur du dessus de la \textbf{pile}.
+
+\subsubsection{Résolution}
+\label{sec:org614d658}
+
+    Maintenant qu'on à des piles à notre disposition, on peut les utiliser pour résoudre ce problème. Pour cela on va regarder caractères par caractères et dès qu'on va croiser un \texttt{\{},\textasciitilde{}(\textasciitilde{} ou \texttt{[} on va ajouter ce caractère dans notre \textbf{pile} \uline{p} crée précédemment et ceux grâce à \texttt{empile}. Si on croise à l'inverse comme caractère \texttt{]},\textasciitilde{})\textasciitilde{} ou \texttt{\}}, on va regarder grâce à \texttt{valeurTop} si notre char dans la \textbf{pile} \uline{p} corresponds au même brackets (\emph{mais cette fois-ci le brackets ouvrant}).
+Si oui on \texttt{depile} \uline{p}, sinon on ne fait rien. Ainsi si toutes nos brackets forment une expression correcte, la pile sera forcément vide. Il suffit donc de ragarder à la fin de l'expression si la \textbf{pile} \uline{p} est vide.Si elle l'est alors l'expression est correcte est on peu renvoyé true, sinon on renvoie false. 
+
+Cependant un cas particulier peut poser problème, si l n'y a aucun \texttt{\{} \texttt{[} ou \texttt{(} , la \textbf{pile} ne se remplira jamais (\emph{vu qu'on appellera jamais \texttt{empile}}). Il faut donc s'assurer qu'il y en a au moins un.
+
+
+\begin{verbatim}
+
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdbool.h>
+
+struct maillon
+{
+  struct maillon* suivant;
+  char caracteres;
+};
+
+typedef struct maillon maillon;
+
+struct pile
+{
+  maillon* debut;
+};
+
+typedef struct pile pile;
+
+void empile(pile* p, maillon* c)
+{
+  if(p->debut == NULL)
+    {
+      p->debut = c;
+      c->suivant = NULL;
+
+    }
+  else
+    {
+      maillon* premier = p->debut;
+      p->debut = c;
+      c->suivant = premier;
+    }
+  maillon* maillonEncours = p->debut;
+
+  while (maillonEncours != NULL)
+    {
+
+      maillonEncours = maillonEncours->suivant;
+    }
+}
+
+void depile(pile* p)
+{
+
+  if(p->debut != NULL)
+    {
+      p->debut = p->debut->suivant;
+    }
+
+}
+char ValeurTop(pile* p)
+{
+  if(p->debut !=NULL)
+    {
+      return p->debut->caracteres;
+    }
+  return '0';
+
+}
+
+int main()
+{
+  bool bracketsEntrees = false;
+  pile p = {NULL};
+  char expression[2049];
+  scanf("%s", expression);
+  int taille = strlen(expression);
+  for(int i = 0; i<taille;i++)
+    {
+      if (expression[i] == '{' || expression[i] == '[' || expression[i] == '(')
+	{
+	  bracketsEntrees = true;
+	  // maillon m = {NULL,expression[i]};
+	  maillon * m;
+	  m= (maillon *) malloc(1*sizeof(maillon));
+	  m->suivant = NULL;
+	  m->caracteres = expression[i];
+	  empile(&p,m);
+	}
+      else if(expression[i]-1 ==  ValeurTop(&p) || expression[i] -2 == ValeurTop(&p))
+	{
+
+	  depile(&p);
+	}
+
+    }
+
+  if(p.debut == NULL && bracketsEntrees == true)
+    {
+      printf("true\n");
+    }
+  else
+    {
+      printf("false\n");
+    }
+
+  return 0;
+}
+
+\end{verbatim}
+
+\subsection{Vérification de mon code}
+\label{sec:org839935d}
+
+
+\subsubsection{Entrée du test à réaliser}
+\label{sec:orgd3977fd}
+
+\url{file-IN.txt}
+
+\subsubsection{Mon résultat pour ce test}
+\label{sec:org3896282}
+
+\begin{verbatim}
+../brackets_EXTREME < file-IN.txt
+\end{verbatim}
+
+\subsubsection{Résultat attendue pour ce test}
+\label{sec:orgfd22d2f}
+
+\phantomsection
+\label{org48bd3b1}
+\begin{verbatim}
+true
+\end{verbatim}
+
+\subsubsection{Comparaison des résultats}
+\label{sec:org6777ff8}
+
+\begin{verbatim}
+Même résultats
+\end{verbatim}
+
+\subsection{Au niveau de la mémoire}
+\label{sec:orgd6b64ec}
+
+Les images suivantes ont était récupérées à l'aide de ddd en lançant le programme \texttt{brackets} avec en entré \emph{\{[()]\}} (correct) ou \emph{\{[(]\}} (incorrect) . (\emph{\ref{fig:org610fb8e}, \ref{fig:org8647058}, \ref{fig:org1b1cc5e}, \ref{fig:orgace48fa}}). 
+
+\begin{itemize}
+\item \ref{fig:org610fb8e} représente la pile p au tout début,
+\item \ref{fig:org8647058} représente la pile p lorsque tous les empiles sont finis
+\item \ref{fig:org1b1cc5e} représente la pile p avant le print (si brackets correct)
+\item \ref{fig:orgace48fa} représente la pile p avant le print (si brackets incorrect)
+\end{itemize}
+
+
+
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=.9\linewidth]{./img/bracketsDebut.png}
+\caption{\label{fig:org610fb8e}
+répresentation de la pile p au début (avant les empiles)}
+\end{figure}
+
+
+
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=.9\linewidth]{./img/bracketsFinEmpile.png}
+\caption{\label{fig:org8647058}
+répresentation de la pile p après les empiles (avant les depiles)}
+\end{figure}
+
+
+
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=.9\linewidth]{./img/bracketsFinTrue.png}
+\caption{\label{fig:org1b1cc5e}
+répresentation de la pile p avant le print (si brackets correct)}
+\end{figure}
+
+
+
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=.9\linewidth]{./img/bracketsFinFalse.png}
+\caption{\label{fig:orgace48fa}
+répresentation de la pile p avant le print (si brackets incorrect)}
+\end{figure}
+
+\subsection{Solution}
+\label{sec:org65d1afd}
+
+Solution apportée par \uline{Alain Delpuch} :
+
+
+\begin{verbatim}
+#include <stdio.h>
+
+const char *e;
+
+void 
+parse(char until) {
+    while(1) {
+	char c = *e++;
+	if (c == until) return;
+	switch(c) {
+	    case '(' : parse(')'); break;
+	    case '[' : parse(']'); break;
+	    case '{' : parse('}'); break;
+	    case  0  :
+	    case ')' : 
+	    case ']' :
+	    case '}' : printf("false\n"); exit(1);
+	}
+    }
+}
+
+main() {
+    char expression[2049];
+    scanf("%s", expression);
+    e = expression ;
+    parse(0); 
+    printf("true\n");
+}
+\end{verbatim}
+
+Cette solution bien que assez compacte est dur à expliquer.On commence par la fonction main qui demande à l'utilisateur l'expression et le stock dans une autre variable globale \uline{e}. Ensuite il appelle une fonction \texttt{parse} avec 0 comme argument (On verra à la fin pourquoi 0).
+
+Dans la fonction parse, on va regarder en boucle le prochain caractères dans l'expression(\emph{même si on est dans un parse différent,par exemple si j'appelle mon parse une première fois et que j'en suis à regarder le 5 eme caractères de l'expression, si je rappelle une seconde fois mon parse, je vais directement regarder la 6 eme valeur, et non la première}). On va ensuite avoir 3 cas majeurs. Le cas où \uline{c} est égale à \texttt{\{} \texttt{(} ou \texttt{[} et c différent de \uline{until} (\emph{le paramètre du parse actuelle}), \uline{c} = \texttt{]} \texttt{)} ou \texttt{\}} et \uline{c} != \uline{until} et enfin \uline{c} == \uline{until}.
+
+\begin{enumerate}
+\item Dans le premier cas on va appeler récursivement \texttt{parse} et cette fois ci avec comme argument le brackets paire à celle-ci. Comme ça si le prochain brackets que l'on voit et aussi le brackets paire, on va avoir \uline{c} $\backslash$=$\backslash$= \uline{until} (\emph{donc l'expression respecte bien les conditions pour le moment}) ,on va se retrouver dans le 3 eme cas  et le \texttt{parse} appeler va donc arrêter de tourner. Mais si \uline{c} != \uline{until} On va se retrouver dans le 2 eme cas et le programme va retourner false.
+
+\item Dans ce cas le programme retournera quoi qu'il arrive false puisque les conditions ne sont pas respectées, en effet si on arrive à ce cas c'est soit que le brackets ouvert n'est pas le même que le brackets fermé (\emph{c'est à dire qu'on provient du cas 1}), soit le \texttt{parse} actuelle est celui appelé dans le main, et dans ce cas notre expression commence par un brackets fermé, et il est donc impossible que les conditions soit respectés.
+\end{enumerate}
+
+
+\begin{enumerate}
+\item Si on est dans ce cas, c'est alors que comme indiqué dans le cas 1, on à une bonne correspondance de pair.On va donc stopper le parse actuelle.
+\end{enumerate}
+
+Si toutes nos brackets sont correctes (et donc qu'on à seulement suivis le cas 1 et 3). On va se revenir à notre \texttt{parse(0)}. Cependant on ne vas pas tomber dans le cas 2 puisque étant arriver à la fin du tableau, la prochaine case aura comme contenu 0 (\emph{puisque c'est une variable générale, du moins je l'espère car sinon j'ai rien compris}). Ainsi on va bien finir sur un cas 3. On va donc sortir du \texttt{parse(0)} et continuer le main, ou on va afficher true, Ce qui correspond bien au cas ou tous nos brackets sont correctes.
+
+La boucle while(1) permet de continuer à avancer dans l'expression si notre caractère actuelle n'est pas l'un des 7 cas présent (exemple 'R' ou '5').
+
+(Alain Delpuch je t'aime bien sauf lorsque tu fait de tel algorithme).
+
+
+
+\section{Lumen}
+\label{sec:org1f9ed0b}
+
+\href{https://www.codingame.com/training/easy/lumen}{Lien vers le problème} 
+
+\subsection{Introduction}
+\label{sec:org9e1215e}
+
+Imaginons une salle carrée de taille N avec des bougies éclairant chacune un carrée autour d'elle de longueur L.
+On cherche à savoir le nombre de cases sans lumière, c'est à dire celle n'étant pas dans le rayon d'action des bougies
+Notre algorithme doit renvoyer le nombre de cases non éclairés.
+
+Exemples: 
+
+Entrée:
+N=6 
+L=2
+
+\begin{center}
+\begin{tabular}{llllll}
+\hline
+X & X & X & X & X & X\\
+X & X & X & X & X & X\\
+X & C & X & X & X & X\\
+X & X & X & X & X & X\\
+X & X & X & C & X & X\\
+X & X & X & X & X & X\\
+\hline
+\end{tabular}
+\end{center}
+
+Sortie:
+
+19 
+
+\subsection{Principe de résolution}
+\label{sec:org1acc82a}
+
+On stock le schéma fournit par l'utilisateur dans un tableau 2D *tabPiece *. 
+
+Ensuite on regarde case par case dans \textbf{tabPiece} à la recherche d'un 'C'. Si notre case actuelle est un 'C', on regarde les cases dans un rayon L autour de la case actuelle qu'on va remplir avec u 'L' à la place d'un 'X'. Cependant il faut s'assurer de 2 choses pendant cette étape:
+
+\begin{itemize}
+\item Il faut  s'assurer qu'on ne remplace pas un 'C' par un 'L', car on peut supprimer la prochaine bougie et donc rendre notre sortie fausse
+\item Il faut aussi s'assurer qu'on ne dépasse pas les bordures de notre tableau (\emph{Par exemple si on à une bougie dans le coin supérieur gauche de notre schéma et que l'intensité de la lumiére est de 2. On ne pourra pas mettre 'L' au case avant notre bougie}).
+\end{itemize}
+
+Il suffira ensuite de refaire un tour du tableau est de compter le nombre de 'X' restant, puis de l'afficher.
+
+
+
+
+\begin{verbatim}
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdbool.h>
+
+// Est ce que les heures sup sont payés en linux ?
+
+int main()
+{ 
+   int N;
+     scanf("%d", &N);
+     int L;
+     scanf("%d", &L); 
+     L--;
+
+     char ** tabPiece = (char**) malloc(N*sizeof(char*));
+
+     for(int i = 0; i<N;i++)
+     {
+     tabPiece[i] = (char*) malloc(((N+1)*2)*sizeof(char));
+     fgets(tabPiece[i], N*2+1, stdin);
+
+     }
+
+  for (int i = 0;i<N;i++)
+    {
+      for (int j = 0;j < N*2;j+=2)
+	{
+	  if (tabPiece[i][j] == 'C')
+	    {
+	      int l;
+	      int L2;
+	      int limite;
+	      int Limite;
+
+	      l = i-L >= 0 ? i-L : 0;
+	      L2 = j-L*2 >= 0 ? j-L*2 : 0;
+	      limite = i+L < N ? i+L : N-1;
+	      Limite =  j+L*2 < N*2 ? j+L*2 : N*2-1;
+
+	      for(int u = l;u <= limite;u++)
+		{
+		  for (int v = L2; v <=Limite;v+=2)
+		    {
+		      if(tabPiece[u][v] != 'C')
+			{
+			  tabPiece[u][v] = 'L';
+			}
+		    }
+		}
+
+	    }
+	}
+    }
+
+  int nbr = 0;
+  for (int i =0; i < N;i++)
+    {
+      //printf(">>>%s\n",tabPiece[i]);
+      for (int j = 0; j < N*2;j++)
+	{
+	  if (tabPiece[i][j] == 'X')
+	    {
+	      nbr++;
+	    }
+	}
+    }
+
+  printf("%d\n",nbr);
+
+  return 0;
+}
+
+\end{verbatim}
+
+\subsection{Vérification de mon code}
+\label{sec:orgfccf2aa}
+
+\subsubsection{Entrée du test à réaliser}
+\label{sec:orgecd2101}
+
+\url{file-IN.txt}
+
+\subsubsection{Mon résultat pour ce test}
+\label{sec:org3a5c9a1}
+
+\begin{verbatim}
+../lumen < file-IN.txt
+\end{verbatim}
+
+\phantomsection
+\label{org62f69d1}
+\begin{verbatim}
+90
+\end{verbatim}
+
+\subsubsection{Résultat attendue pour ce test}
+\label{sec:orgf33a561}
+
+\phantomsection
+\label{org84f8efc}
+\begin{verbatim}
+90
+\end{verbatim}
+
+\subsubsection{Comparaison des résultats}
+\label{sec:org97b0f2f}
+
+\begin{verbatim}
+Même résultats
+\end{verbatim}
+
+\subsection{Au niveau de la mémoire}
+\label{sec:orgadda56a}
+
+Les images suivantes ont était récupérées à l'aide de ddd en lançant le programme \texttt{lumen} avec en entré :
+
+\begin{center}
+\begin{tabular}{lllll}
+\hline
+5 &  &  &  & \\
+\hline
+2 &  &  &  & \\
+\hline
+X & X & X & X & X\\
+X & C & X & X & X\\
+X & X & X & X & X\\
+X & X & X & X & C\\
+X & X & X & X & X\\
+\hline
+\end{tabular}
+\end{center}
+
+
+\begin{itemize}
+\item \ref{fig:org6036ad3} représente le tableau 2D tabPiece après la saisie de l'utilisateur
+\item \ref{fig:org4c5bfc9} représente le tableau 2D tabPiece après modification par l'algorithme
+\item \ref{fig:org50822e7}  représente le tableau 2D tabPiece à la fin de l'algorithme
+\end{itemize}
+
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=.9\linewidth]{./img/lumenSchémaDébut.png}
+\caption{\label{fig:org6036ad3}
+représentation du tableau 2D tabPiece après la saisie de l'utilisateur}
+\end{figure}
+
+
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=.9\linewidth]{./img/lumenSchémaModifier.png}
+\caption{\label{fig:org4c5bfc9}
+représentation du tableau 2D tabPiece après modification par le programme}
+\end{figure}
+
+
+
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=.9\linewidth]{./img/lumenFin.png}
+\caption{\label{fig:org50822e7}
+représentation de la mémoire à la fin de l'algorithme}
+\end{figure}
+
+
+
+\subsection{Solution}
+\label{sec:org56b5b52}
+
+Solution de Alain-Delpuch 
+
+\begin{verbatim}
+// ------------------------------------------------------------------
+//                                                              Lumen
+// ------------------------------------------------------------------
+#include <stdio.h>
+// ------------------------------------------------------------------
+int map[25][25];
+int N,L;
+// ------------------------------------------------------------------
+void
+F(unsigned  int i, unsigned int j, int l){
+    if ( i >= N || j >= N || l < map[i][j] ) return;
+    map[i][j] = l--;
+    F( i-1 , j-1 , l) ; F( i-1 , j   , l) ; F( i-1 , j+1 , l) ; 
+    F( i   , j-1 , l) ;                   ; F( i   , j+1 , l) ; 
+    F( i+1 , j-1 , l) ; F( i+1 , j   , l) ; F( i+1 , j+1 , l) ; 
+}
+// ------------------------------------------------------------------
+main() {
+    scanf("%d %d\n", &N, &L);
+    for (int i = 0; i < N; i++) {
+	for (int j = 0; j < N; j++) {
+	    char buf[2];
+	    scanf("%s",buf);
+	    F( i , j , *buf=='X' ? 0 : L);
+	}
+    }
+    int result = 0;
+    for (int i = 0; i < N; i++) {
+	for (int j = 0; j < N; j++) {
+	    result += map[i][j] == 0;
+	}
+    }
+    printf("%d",result);
+}
+\end{verbatim}
+
+
+Dans cette algorithme, on prends chaque caractère un par un, puis en fonction de si cette case contient 'C' ou 'X', on appelle la fonction \texttt{F} avec comme argument le numéro de ligne et de colonne de la case, puis \uline{L} ou 0 (si la case contient 'C' ou 'X' )
+
+La fonction \texttt{F} va appliquer \uline{l} (son 3 eme argument) à la case actelle puis elle va réappliquer la fonction \texttt{F} (\emph{avec \uline{l}-- cette fois-ci}) pour toutes les cases autour et ceux jusqu'à ce que \uline{l} soit strictement inférieur à la valeur dans la case actuelle (avec toutes les cases initialisé à 0) ou qu'on dépasse la limite du tableau. Cela permet par exemple si \uline{L} = 3 de remplir la case au centre avec 2, puis celle en périphérie par 1(\emph{tout en faisant attention de ne pas remplacer le 2 au centre}).
+
+On applique cette méthode pour toutes les case du schéma. Il suffit donc ensuite de calculer le nombre de fois où une case est égale à 0 dans notre tableau 2D \uline{map} et de l'afficher. 
+
+
+\section{Autre fichier}
+\label{sec:org0ea0acc}
+
+\subsubsection{Différentes version de ce document}
+\label{sec:orgceb6ee0}
+
+\href{./compte\_rendu.org}{Ce même document en org mode}
+
+\href{./compte\_rendu.tex}{Ce même document en latex} 
+(\href{./compte\_rendu.pdf}{le pdf ici})
+
+\href{./compte\_rendu.html}{Ce même document en html}
+
+\href{./compte\_rendu\_reveal.html}{Ce même document en \ldots{} reveal}
+
+\subsubsection{Mes fichiers IN et OUT}
+\label{sec:orgda27a11}
+
+\url{./brackets\_IN.txt}
+\url{./brackets\_OUT.txt}
+\url{./lumen\_IN.txt} 
+\url{./lumen\_OUT.txt}
+\end{document}

@@ -1,0 +1,54 @@
+% Created 2020-05-25 lun. 14:15
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\author{cliquot}
+\date{\today}
+\title{}
+\hypersetup{
+ pdfauthor={cliquot},
+ pdftitle={},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 26.3 (Org mode 9.1.9)}, 
+ pdflang={English}}
+\begin{document}
+
+\tableofcontents
+
+\section{Compte rendu pour les coding games Lumen et Bracklets.\hfill{}\textsc{Titre}}
+\label{sec:org2db784c}
+
+\subsection{Bracklets\hfill{}\textsc{Titre}}
+\label{sec:orgd3d1c82}
+
+\subsubsection{Introduction\hfill{}\textsc{sous}}
+\label{sec:org97d6ba4}
+
+
+Ceci est une introduction
+\subsection{Lumen\hfill{}\textsc{nouveau}}
+\label{sec:org09f87be}
+
+\subsubsection{Introduction}
+\label{sec:org9e46752}
+
+Ceci est une int
+
+\begin{enumerate}
+\item test
+\item nouveau test
+\end{enumerate}
+\end{document}
